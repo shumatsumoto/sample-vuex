@@ -1,73 +1,54 @@
 <template>
   <div class="container">
+    <div class="countNum">{{ countNum }}</div>
     <div>
-      <Logo />
-      <h1 class="title">
-        sample-vuex
-      </h1>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
+      <span>Mutations：</span>
+      <button @click="incrementCountM">+</button>
+      <button @click="decrementCountM">-</button>
+    </div>
+    <div>
+      <span>Actions　：</span>
+      <button @click="incrementCountA">+</button>
+      <button @click="decrementCountA">-</button>
     </div>
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  computed: {
+    // ▼ Getters
+    countNum() {
+      return this.$store.getters['countGetters']
+    }
+  },
+  methods: {
+    // ▼ Mutations
+    incrementCountM() {
+      this.$store.commit('incrementMutations', 1)
+    },
+    decrementCountM() {
+      this.$store.commit('decrementMutations', 1)
+    },
+
+    // ▼ Actions
+    incrementCountA() {
+      this.$store.dispatch('incrementActions', 2)
+    },
+    decrementCountA() {
+      this.$store.dispatch('decrementActions', 2)
+    }
+  }
+}
 </script>
 
 <style>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.title {
-  font-family:
-    'Quicksand',
-    'Source Sans Pro',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
-}
+  .container {
+    text-align: center;
+  }
+  .countNum {
+    font-weight: bold;
+    font-size: 24px;
+    margin: 20px auto;
+  }
 </style>
